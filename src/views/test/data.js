@@ -43,6 +43,18 @@ export const layout = {
         label: "desc",
         value: "type"
       }
+    },
+    {
+      inputModel: "fsTime",
+      title: "开始时间",
+      name: "stratTimeValue"
+    },
+    {
+      inputModel: "fsDoubleTime",
+      title: "申请退换时间",
+      name: "retrunTimeValue",
+      value: ["", ""],
+      labelWidth: "120px"
     }
   ],
   // 表格样式
