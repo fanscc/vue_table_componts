@@ -1,0 +1,30 @@
+{
+    "code": 0,
+    "empty": false,
+    "errorCode": 0,
+    "notEmpty": true,
+    "success": true,
+    "unSuccess": false,
+    "model": {
+        "退货": [
+            {
+                "desc": "退货",
+                "type": "1"
+            },
+            {
+                "desc": "换货",
+                "type": "2"
+            }
+        ],
+        "退换货状态": [
+            {
+                "desc": "成功",
+                "type": "1"
+            },
+            {
+                "desc": "失败",
+                "type": "2"
+            }
+        ]
+    }
+}

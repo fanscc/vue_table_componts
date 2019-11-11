@@ -1,0 +1,35 @@
+{
+    "code": 0,
+    "empty": false,
+    "errorCode": 0,
+    "notEmpty": true,
+    "success": true,
+    "unSuccess": false,
+    "model": {
+        "total": 5,
+        "list": [
+            {
+                "orgName": "珠海远大汽车维修服务有限公司",
+                "provinceName": "广东  珠海市  香洲区",
+                "status": 1,
+                "contactPerson": "小王",
+                "contactMobile": "0756-8589255",
+                "balance": "0",
+                "money": 123654,
+                "orgId2BalanceUpdateTimeStrMap": "2016-09-21 15:08:16",
+                "created": "fanscky"
+            },
+            {
+                "orgName": "珠海远大汽车维修服务有限公司",
+                "provinceName": "广东  珠海市  香洲区",
+                "status": 0,
+                "contactPerson": "小王",
+                "contactMobile": "0756-8589255",
+                "balance": "1",
+                "money": 123654,
+                "orgId2BalanceUpdateTimeStrMap": "2016-09-21 15:08:16",
+                "created": "fanscky"
+            }
+        ]
+    }
+}
