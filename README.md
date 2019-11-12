@@ -270,13 +270,13 @@ dealData方法无需理会,我们需要的参数需要在res.model里面
 
 
 > ### 查询组件searchDom展示
-<img src="../../assets/search.jpg" width="100%">
+<img src="./src/assets/search.jpg" width="100%">
 
 
 
 # table表格分页公用组件
 
-> 用于配置table显示与查询,分页公共
+> 用于配置table显示与查询,分页公共组件
 
 ## 使用方法
 
@@ -452,7 +452,7 @@ dealData方法无需理会,我们需要的参数需要在res.model里面
 ---
 
 > ### 表格展示
-<img src="../../assets/table1.jpg" width="100%">
-<img src="../../assets/table2.jpg" width="100%">
+<img src="./src/assets/table1.jpg" width="100%">
+<img src="./src/assets/table2.jpg" width="100%">
 
 
