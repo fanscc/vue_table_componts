@@ -474,4 +474,4 @@ dealData方法无需理会,我们需要的参数需要在res.model里面
 <img src="./src/assets/table1.jpg" width="100%">
 <img src="./src/assets/table2.jpg" width="100%">
 
-
+## 项目链接 [链接](https://fanscc.github.io/vue_table_componts/dist/index.html#/)
