@@ -451,6 +451,25 @@ dealData方法无需理会,我们需要的参数需要在res.model里面
 
 ---
 
+# <font color='red'> 注意：</font>
+  * 此组件依赖element-ui,跟axios 
+  * 列表请求成功与否需要后台返回success字段true成功false失败，返回的列表数组参数需要在model.list或者model.model里面 获取列表的请求如下：
+```javascript
+.then(res => {
+  if (res.success) {
+    if (this.fliterData && typeof this.fliterData === "function") {
+      this.realTableData = this.fliterData(res.model.list);
+    } else {
+      this.realTableData = res.model.list || res.model.model || [];
+    }
+    this.total = res.model.total;
+    this.$nextTick(() => {
+      this.$refs.tableDom.doLayout();
+    });
+  } 
+})
+```
+
 > ### 表格展示
 <img src="./src/assets/table1.jpg" width="100%">
 <img src="./src/assets/table2.jpg" width="100%">
