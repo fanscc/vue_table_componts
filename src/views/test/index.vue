@@ -1,5 +1,6 @@
 <template>
   <div class="common_test">
+    <!-- 查询条件 -->
     <searchDom
       v-model="valueClone"
       :search-from="searchFrom"
@@ -7,10 +8,23 @@
       path="/select"
       style="margin-top:20px;"
     >
+      <template slot="selfdingyi" slot-scope="scope">
+        <el-form-item
+          :label="scope.data.title + '：'"
+          :label-width="scope.data.labelWidth"
+        >
+          <el-input
+            style="width: 200px"
+            v-model="valueClone[scope.data.name]"
+            placeholder="请输入内容"
+          ></el-input>
+        </el-form-item>
+      </template>
       <el-button type="primary" icon="el-icon-search" @click="search">
         搜索
       </el-button>
     </searchDom>
+    <!-- 表格 -->
     <tableDom
       ref="tableCommon"
       path="/mock_autoTreasure"

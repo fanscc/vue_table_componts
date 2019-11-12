@@ -1,92 +1,193 @@
 
-### 此组件是查询下面对应的table的共用组件
+# table表格分页公用组件
+
+> 用于配置table显示与查询,分页公共
 
 ## 使用方法
-`
-/**
-   tableDom 支持配置JSON文件来实现显示不同的表格
-   @realTableColumns: 用来表示有哪些查询条件组成的实例看下面的searchFrom数组
-   @realTableData: 用来表示查询条件的参数
-   @childmethods 用来接收子组件广播上的方法有下一页,页面大小切换，功能按钮的一些方法
-   @total 总计数量
-   @slot-scope 自定义的时候外层的scope为我们自己配置的js里面的数据,内层的scopeRow对应的是后台返回的那一行的数据
-*/
-     <tableDom
-      :realTableColumns="realTableColumns"
-      :realTableData="realTableData"
-      @childmethods="childmethods"
-      :total="total"
-    >
-      <template slot="slotName" slot-scope="scope"> 
-        <el-table-column
-          :label="scope.data.title"
-          :prop="scope.data.name"
-        >
-         <template slot-scope="scopeRow">
-          <div>{{scopeRow.row.name}}</div>
-          <div>{{scopeRow.row.id}}</div> 
-         </template>
-        </el-table-column>
-      </template>
-    </tableDom>
-    
-   // 表格样式
+
+```HTML
+  <!-- 表格 -->
+  <tableDom
+    ref="tableCommon"
+    path="/mock_autoTreasure"
+    totalPath="/totalPath"
+    :totalRowMap="{money: moneyTotal}"
+    totalFormatterType ="thousandMark"
+    :paginationShow="true"
+    request_method="post"
+    :table_control="true"
+    :real-table-columns="realTableColumns"
+    @childmethods_out="childmethods_out"
+  />
+```
+### tableDom Attributes
+
+| 参数 | 说明 | 类型 | 可选值 | 默认值 |  
+| :-:| :-: | :-: |:-: | :-: |
+| path | 列表请求的后台接口 | String | - | - |  
+| totalPath | 合计行请求后台接口 | String | - | - |
+| totalRowMap | 合计行控制那些列显示合计行对象里面的键名对应列表当前列对应的字段,键值对应合计行返回的参数字段 | Object | - | get |
+| totalFormatterType | 合计行显示的格式 | Sting | thousandMark(千分符) | - |
+| paginationShow | 是否显示分页组件 | Boolean | - | true |
+| request_method | 请求列表接口的方法 | Sting | get,post | get |
+| table_control | 是否显示控制动态表格表头的组件 | Boolean | - | true |
+| spanMethod | 合并表格的方法参考elementUI合并表格方法 | Function | - | - |
+| beforeSearch | 请求列表数据的之前的方法 | Function(pramas, done){done(newPramas)};pramas为查询参数,newPramas为处理后的参数 | - | - |
+
+---
+
+### realTableColumns Js数组
+
+```javascript
+ // 表格样式
   realTableColumns: [
     // 配置表格
     {
-      align: "center", // 对应数据是否居中
-      name: "",        // 对应后端返回的字段名字 
-      title: "序号",   // tableHeader上显示的名称
-      type: "index",   // 序号跟复现框有
-      width: "50"      // 当前列的宽度
+      title: "#",
+      width: "55",
+      ishidden: true,
+      type: "selection"
+    },
+    {
+      title: "序号",
+      width: "55",
+      ishidden: true,
+      type: "index"
     },
     {
       name: "orgName",
-      title: "汽修厂"
-      type: "slot" // 支持自定义
+      title: "用户编号",
+      iconName: "el-icon-question",
+      tooltipContent: "你好,这是详细的描述"
     },
     {
       name: "provinceName",
-      title: "区域"
-    },
-    {
-      name: "contactPerson",
-      title: "联系人"
+      type: "dialog",
+      isShowClick: function(row) {
+        if (row.status) return true;
+      },
+      title: "用户名"
     },
     {
       name: "contactMobile",
-      title: "联系电话"
-    },
-    {
-      name: "address",
-      title: "联系地址"
+      title: "电话号",
+      type: "tooltip",
+      width: "80"
     },
     {
       name: "balance",
-      title: "汽配余量"
+      type: "formatter",
+      formatterType: function(row) {
+        if (row.balance === "0") {
+          return "启用";
+        } else {
+          return "停用";
+        }
+      },
+      title: "状态"
+    },
+    {
+      name: "money",
+      title: "金额",
+      type: "formatter"
     },
     {
       name: "orgId2BalanceUpdateTimeStrMap",
-      title: "最近更新时间"
+      title: "时间",
+      type: "multColumns",
+      slotName: [
+        { label: "创建人", name: "created" },
+        { label: "时间", name: "orgId2BalanceUpdateTimeStrMap" }
+      ]
     },
     {
-      name: "",
-      title: "明细列表",
+      name: "active",
+      title: "操作",
+      width: "180",
       fixed: "right",
       type: "button",
-      buttons: [   // 用来控制操作栏的 
-        // 配置操作栏   
+      buttons: [
+        // 配置操作栏
         {
-          name: "查看",  // 按钮名字
-          icon: null,   // 按钮前面的icon
+          name: "编辑",
           event: {
-            type: "routerMethod", // 用来控制是什么类型的按钮功能现有弹窗跟路由跳转
-            params: ["balanceRecordType", "orgId"], // 路由跳转的时候需要带到下个页面去的参数
-            url: "/financial/balanceEnquiryDetail"  // 路由跳转的路径
+            type: "routerMethod",
+            params: ["status", "orgName"],
+            url: "/edit"
+          }
+        },
+        {
+          name: "删除",
+          typeIcon: "danger",
+          isShow: function(index, row) {
+            if (row.status === 1) {
+              return true;
+            } else {
+              return false;
+            }
+          },
+          event: {
+            type: "delete",
+            params: ["status", "orgName"],
+            request_method: "post",
+            url: "/mock_autoTreasure"
           }
         }
       ]
     }
   ]
-`
-# 具体可以参考财务统计汽配宝管理组件。
+```
+---
+
+> ### 通用参数 
+
+| 参数 | 说明 | 类型 | 可选值 | 默认值 |  
+| :-:| :-: | :-: |:-: | :-: |
+| title | 表头文字 | String | - | - | 
+| width | 当前列的宽度不配置则自适应宽度 | String | - | - |
+| ishidden | 动态控制表头的时候是否需要配置true则表示当前列必显示,与table_control关联使用 | Boolean | - | false |
+| type | 控制列的类型 | String | selection,<br>index,dialog,<br>tooltip,<br>formatter<br>button,multColumns | - |
+| isShowClick | 当type=dialog,isShowClick用来判断是否点击出现弹窗返回true则可以点击出现弹窗 | Function(row){if (row.status === 1){return true}else {return false}} | - | - |
+| iconName | 表头鼠标滑过出现提示信息的icon | String | - | - |
+| tooltipContent | 表头鼠标滑过出现提示信息文字 | String | - | - |
+| formatterType | 当type=formatter是配置的过滤的方法,不配置则默认是做千分符过滤 | Function(row){if (row.status === 1) {return '启动'}else {return '停用'}} | - | - |
+| slotName | 当type=multColumns当前列显示几行slotName没一项代表一行 | Array | - | - |
+
+----
+
+> ### type=button时配置操作栏buttons对象参数配置
+
+| 参数 | 说明 | 类型 | 可选值 | 默认值 |  
+| :-:| :-: | :-: |:-: | :-: |
+| name | 操作栏里面的按钮的文字 | String | - | - | 
+| typeIcon | 操作栏按钮的风格参考elementUi button按钮type | String | - | primary | 
+| isShow | 操作栏按钮是否显示返回true显示否则不显示 | Function(index, row) {if (row.status ===1) {return true} else { return false}} | - | true |
+| event.type | 配置当前按钮对应的功能 | String | routerMethod,delete(routerMethod路由跳转,delete删除当前列)。支持自定义方法 | - |
+| event.params | 配置方法对应的参数 | Array | - | - |
+| event.request_method | 配置如果需要跟后台交付时候的方法 | String | get,post | - |
+| event.url | 配置当前按钮对应的路径如果是路由跳转则对应需要跳转页面的路由地址,如果是跟后台交付的则对应的后台接口路径 | String | - | - |
+
+---
+
+> ### Table Methods
+| 参数 | 说明 | 类型 | 可选值 | 默认值 |  
+| :-:| :-: | :-: |:-: | :-: |
+| childmethods_out | 接受表格里面除了delete删除跟routerMethod路由跳转外,所有按钮广播事件 | String | Function(button, val) {} button对应的button操作栏里面的配置属性,val为当前点击的行的数据 | - | 
+
+---
+
+> ### 表格展示
+<img src="../../assets/table1.jpg" width="100%">
+<img src="../../assets/table2.jpg" width="100%">
+
+
+
+
+
+
+
+
+
+
+
+

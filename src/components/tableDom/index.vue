@@ -31,7 +31,7 @@
         </div>
         <el-button slot="reference" class="float_r">
           <i
-            class="el-icon-caret-bottom icon_table"
+            class="icon_table"
             :class="[
               headerControl ? 'el-icon-caret-top' : 'el-icon-caret-bottom'
             ]"

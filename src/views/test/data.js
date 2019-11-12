@@ -13,7 +13,6 @@ export const layout = {
       placeholder: "请选择",
       name: "orderType",
       value: "0",
-      clearable: false,
       staticArr: [
         { label: "退货", value: "0" },
         { label: "换货", value: "1" }
@@ -45,6 +44,12 @@ export const layout = {
       }
     },
     {
+      title: "自定义",
+      name: "selfValue",
+      type: "slot",
+      slotName: "selfdingyi"
+    },
+    {
       inputModel: "fsTime",
       title: "开始时间",
       name: "stratTimeValue"
@@ -53,8 +58,14 @@ export const layout = {
       inputModel: "fsDoubleTime",
       title: "申请退换时间",
       name: "retrunTimeValue",
-      value: ["", ""],
       labelWidth: "120px"
+    },
+    {
+      inputModel: "fsmultiTime",
+      title: "认领时间",
+      name: "claimTime",
+      placeholder: "请选择时间",
+      lastFirstToToday: true
     }
   ],
   // 表格样式
