@@ -2,6 +2,9 @@
 
 后台管理系统里面table表格跟查询条件的公共组件
 
+## github地址 [链接](https://github.com/fanscc/vue_table_componts)
+## 项目链接 [链接](https://fanscc.github.io/vue_table_componts/dist/index.html#/)
+
 ## 组件使用
 
 npm install vue-fanscc-table -S-d
@@ -9,8 +12,8 @@ npm install vue-fanscc-table -S-d
 ### main.js
 
 ```javascript
-import vueFansckyTable from "vue-fanscky-table";
-import "vue-fanscky-table/lib/vue-fanscc-table.css";
+import vueFansckyTable from "vue-fanscc-table";
+import "vue-fanscc-table/lib/vue-fanscc-table.css";
 Vue.use(vueFansckyTable);
 // 组件内使用
 <template>
