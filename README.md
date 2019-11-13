@@ -1,32 +1,59 @@
 # vue_component
 
-## Project setup
-```
-npm install
-```
+后台管理系统里面table表格跟查询条件的公共组件
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+## 组件使用
 
-### Compiles and minifies for production
-```
-npm run build
-```
+npm install vue-fanscc-table -S-d
 
-### Run your tests
-```
-npm run test
-```
+### main.js
 
-### Lints and fixes files
-```
-npm run lint
-```
+```javascript
+import vueFansckyTable from "vue-fanscky-table";
+import "vue-fanscky-table/lib/vue-fanscc-table.css";
+Vue.use(vueFansckyTable);
+// 组件内使用
+<template>
+  <div class="remittanceInformation">
+    <searchDom
+      :search-from="searchFrom"
+      v-model="valueClone"
+      style="margin-top:20px;"
+    >
+      <el-button type="primary" @click="search()">查询</el-button>
+    </searchDom>
+    <div></div>
+    <tableDom
+      :realTableColumns="realTableColumns"
+      ref="tableCommon"
+      path="/account"
+      @childmethods_out="childmethods_out"
+    ></tableDom>
+  </div>
+</template>
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+<script>
+import { layout } from "./ckytext.js";
+
+export default {
+  name: "userManagement",
+  data() {
+    return {
+      valueClone: {},
+      searchFrom: layout.searchFrom,
+      realTableColumns: layout.realTableColumns
+    };
+  },
+  methods: {
+    childmethods_out() {},
+    search() {
+      this.$refs.tableCommon.pageIndex = 1;
+      this.$refs.tableCommon.init(this.valueClone);
+    }
+  }
+};
+</script>
+```
 
 
 # searchDom搜索公共组件

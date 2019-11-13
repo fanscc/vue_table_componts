@@ -1,6 +1,15 @@
 .DS_Store
 node_modules
 /dist
+/mock
+/public
+/src/plug
+/src/router
+/src/store
+/src/utils
+/src/views
+/src/App.vue
+/src/main.js
 
 # local env files
 .env.local
