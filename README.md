@@ -234,7 +234,7 @@ export default {
 | sublevel | 联动下拉框下级与后台对应的字段名,如省市联动对应市的字段名,需与parent联合起来使用 | Boolean | - | false |
 | parent | 联动下拉框上级与后台对应的字段名,如省市联动对应省的字段名,需与sublevel联合起来使用 | Boolean | - | false |
 | staticParams | 下拉框请求的默认参数 | Object | - | {} |
-| path | 此下拉框对应的接口请求路径 | String | - | - |
+| path | 此下拉框对应的接口请求路径 | String | - | get |
 
 ---
 
@@ -329,9 +329,9 @@ dealData方法无需理会,我们需要的参数需要在res.model里面
 
 | 参数 | 说明 | 类型 | 可选值 | 默认值 |  
 | :-:| :-: | :-: |:-: | :-: |
-| path | 列表请求的后台接口 | String | - | - |  
-| totalPath | 合计行请求后台接口 | String | - | - |
-| totalRowMap | 合计行控制那些列显示合计行对象里面的键名对应列表当前列对应的字段,键值对应合计行返回的参数字段 | Object | - | get |
+| path | 列表请求的后台接口 | String | - | get |  
+| totalPath | 合计行请求后台接口 | String | - | get |
+| totalRowMap | 合计行控制那些列显示合计行对象里面的键名对应列表当前列对应的字段,键值对应合计行返回的参数字段 | Object | - | - |
 | totalFormatterType | 合计行显示的格式 | Sting | thousandMark(千分符) | - |
 | paginationShow | 是否显示分页组件 | Boolean | - | true |
 | request_method | 请求列表接口的方法 | Sting | get,post | get |

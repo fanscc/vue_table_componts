@@ -24,9 +24,9 @@
 
 | 参数 | 说明 | 类型 | 可选值 | 默认值 |  
 | :-:| :-: | :-: |:-: | :-: |
-| path | 列表请求的后台接口 | String | - | - |  
-| totalPath | 合计行请求后台接口 | String | - | - |
-| totalRowMap | 合计行控制那些列显示合计行对象里面的键名对应列表当前列对应的字段,键值对应合计行返回的参数字段 | Object | - | get |
+| path | 列表请求的后台接口 | String | - | get |  
+| totalPath | 合计行请求后台接口 | String | - | get |
+| totalRowMap | 合计行控制那些列显示合计行对象里面的键名对应列表当前列对应的字段,键值对应合计行返回的参数字段 | Object | - | - |
 | totalFormatterType | 合计行显示的格式 | Sting | thousandMark(千分符) | - |
 | paginationShow | 是否显示分页组件 | Boolean | - | true |
 | request_method | 请求列表接口的方法 | Sting | get,post | get |
