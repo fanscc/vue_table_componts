@@ -24,7 +24,6 @@ export const layout = {
       title: "退货",
       placeholder: "请选择",
       name: "orderStatusList1",
-      value: "1",
       mapName: "退货",
       paramsMaping: {
         label: "desc",
