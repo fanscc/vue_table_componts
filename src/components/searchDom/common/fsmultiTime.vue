@@ -114,6 +114,12 @@ export default {
       immediate: true
     },
     defaultValue(val) {
+      if (val && val[0] === null) {
+        val[0] = "";
+      }
+      if (val && val[1] === null) {
+        val[1] = "";
+      }
       this.$emit("input", val);
     }
   },

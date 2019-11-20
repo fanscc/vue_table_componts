@@ -315,6 +315,7 @@ dealData方法无需理会,我们需要的参数需要在res.model里面
   <tableDom
     ref="tableCommon"
     path="/mock_autoTreasure"
+    :value-clone="valueClone"
     totalPath="/totalPath"
     :totalRowMap="{money: moneyTotal}"
     totalFormatterType ="thousandMark"
@@ -331,6 +332,7 @@ dealData方法无需理会,我们需要的参数需要在res.model里面
 | :-:| :-: | :-: |:-: | :-: |
 | path | 列表请求的后台接口 | String | - | get |  
 | totalPath | 合计行请求后台接口 | String | - | get |
+| valueClone | 查询参数 | Object | - | {} |
 | totalRowMap | 合计行控制那些列显示合计行对象里面的键名对应列表当前列对应的字段,键值对应合计行返回的参数字段 | Object | - | - |
 | totalFormatterType | 合计行显示的格式 | Sting | thousandMark(千分符) | - |
 | paginationShow | 是否显示分页组件 | Boolean | - | true |

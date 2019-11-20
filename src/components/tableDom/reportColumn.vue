@@ -32,6 +32,7 @@
     :width="width"
     :type="type"
     :formatter="formatterMethods"
+    :render-header="renderHeader"
   />
 
   <el-table-column
@@ -39,6 +40,7 @@
     :label="title"
     :prop="name"
     :align="align"
+    :render-header="renderHeader"
   >
     <template slot-scope="scope">
       <span
@@ -60,6 +62,7 @@
     :align="align"
     :fixed="fixed"
     :width="buttonWidth"
+    :render-header="renderHeader"
   >
     <template slot-scope="scope">
       <div style="display:flex;justify-content: center;margin-right:10px">
@@ -84,6 +87,7 @@
     :prop="name"
     :align="align"
     :width="width"
+    :render-header="renderHeader"
   >
     <template slot-scope="scope">
       <el-tooltip
@@ -103,6 +107,7 @@
     align="center"
     :fixed="fixed"
     :width="width"
+    :render-header="renderHeader"
   >
     <template slot-scope="scope">
       <div v-for="(item, index) in slotName" :key="index" class="textLeft">

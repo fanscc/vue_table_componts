@@ -62,6 +62,9 @@ export default {
   },
   watch: {
     defaultValue(val) {
+      if (val === null) {
+        val = [];
+      }
       this.$emit("input", val);
     }
     // value(val) {
