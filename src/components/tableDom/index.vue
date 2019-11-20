@@ -156,6 +156,10 @@ export default {
       type: Boolean,
       default: false
     },
+    pagingWitch: {
+      type: Boolean,
+      default: false
+    }
   },
   components: {
     reportColumn
@@ -300,6 +304,12 @@ export default {
     initSearch(params = {}) {
       this.loading = true;
       // 当有path时,调用对应的接口获取table数据
+       if (this.pagingWitch) {
+        params.current = params.pageIndex
+        params.size = params.pageSize
+        delete params.pageIndex
+        delete params.pageSize
+      }
       request({
         method: this.request_method,
         url: this.path,
