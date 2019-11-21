@@ -32,7 +32,19 @@
       :table_control="true"
       :real-table-columns="realTableColumns"
       @childmethods_out="childmethods_out"
-    />
+    >
+      <template slot="userCode" slot-scope="scopeHeader">
+        <el-table-column align="right" :prop="scopeHeader.data.name">
+          <template slot="header">
+            <el-tooltip content="详细提示信息" placement="top">
+              <span style="text-align: center;display:inline-block;width: 100%"
+                >{{ scopeHeader.data.title }}<i class="el-icon-question"></i
+              ></span>
+            </el-tooltip>
+          </template>
+        </el-table-column>
+      </template>
+    </tableDom>
   </div>
 </template>
 <script>

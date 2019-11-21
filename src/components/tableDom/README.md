@@ -20,6 +20,31 @@
     :real-table-columns="realTableColumns"
     @childmethods_out="childmethods_out"
   />
+
+  <!-- 自定义表头跟自定义列 也可以只自定义表头跟自定义列-->
+    <tableDom
+      ref="tableCommon"
+      path="/mock_autoTreasure"
+      request_method="post"
+      :table_control="true"
+      :real-table-columns="realTableColumns"
+      @childmethods_out="childmethods_out"
+    >
+      <template slot="userCode" slot-scope="scopeHeader">
+        <el-table-column align="right">
+          <template slot="header">
+            <el-tooltip content="详细提示信息" placement="top">
+              <span style="text-align: center;display:inline-block;width: 100%"
+                >{{ scopeHeader.data.title }}<i class="el-icon-question"></i
+              ></span>
+            </el-tooltip>
+          </template>
+          <template slot-scope="scope">
+            <span>{{ scope.row[scopeHeader.data.name] }}</span>
+          </template>
+        </el-table-column>
+      </template>
+    </tableDom>
 ```
 ### tableDom Attributes
 
