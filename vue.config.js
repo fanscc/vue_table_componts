@@ -1,6 +1,7 @@
 "use strict";
 const path = require("path");
-const url = "http://docker34-finance.qipeipu.net";
+const webpack = require("webpack");
+const url = require("./proxy");
 
 // 用来判断是什么环境mock环境测走mock数据
 const Environment = process.env.environment;
@@ -37,12 +38,24 @@ if (Environment !== "mock") {
   };
 } else {
   proxyObj = {
+    "/auth/login": proxyFun(true, url, "/login"),
+    "/auth/info": proxyFun(true, url, "/getInfo"),
+    "/api/menus/build": proxyFun(true, url, "/menus"),
     "/mock_autoTreasure": proxyFun(true, url, "/mock_autoTreasure"),
-    "/select": proxyFun(true, url, "/select")
+    "/select": proxyFun(true, url, "/menus")
   };
 }
 
 module.exports = {
+  /**
+   * You will need to set publicPath if you plan to deploy your site under a sub path,
+   * for example GitHub Pages. If you plan to deploy your site to https://foo.github.io/bar/,
+   * then publicPath should be set to "/bar/".
+   * In most cases please use '/' !!!
+   * Detail: https://cli.vuejs.org/config/#publicpath
+   *
+   */
+
   publicPath: "",
   outputDir: "dist",
   assetsDir: "static",
@@ -64,12 +77,18 @@ module.exports = {
   configureWebpack: {
     // provide the app's title in webpack's name field, so that
     // it can be accessed in index.html to inject the correct title.
-    name: "table公共组件",
+    name: "模板系统",
     resolve: {
       alias: {
         "@": resolve("src")
       }
-    }
+    },
+    plugins: [
+      new webpack.ProvidePlugin({
+        _: "lodash",
+        moment: "moment"
+      })
+    ]
   },
   chainWebpack(config) {
     config.plugins.delete("preload"); // TODO: need test
@@ -88,10 +107,10 @@ module.exports = {
 
       .end();
     config.plugin("define").tap(args => {
-      args[0]["process.env"] = {
-        // 是否线上环境
-        ONLINE: JSON.stringify(process.env.npm_config_env === "online")
-      };
+      args[0]["process.env"].ONLINE = JSON.stringify(
+        process.env.npm_config_env === "online"
+      );
+      args[0]["process.env"].Environment = JSON.stringify(Environment);
       return args;
     });
     config
@@ -99,5 +118,42 @@ module.exports = {
       .when(process.env.NODE_ENV === "development", config => {
         config.devtool("cheap-source-map");
       });
+
+    config.when(process.env.NODE_ENV !== "development", config => {
+      config
+        .plugin("ScriptExtHtmlWebpackPlugin")
+        .after("html")
+        .use("script-ext-html-webpack-plugin", [
+          {
+            // `runtime` must same as runtimeChunk name. default is `runtime`
+            inline: /runtime\..*\.js$/
+          }
+        ])
+        .end();
+      config.optimization.splitChunks({
+        chunks: "all",
+        cacheGroups: {
+          libs: {
+            name: "chunk-libs",
+            test: /[\\/]node_modules[\\/]/,
+            priority: 10,
+            chunks: "initial" // only package third parties that are initially dependent
+          },
+          elementUI: {
+            name: "chunk-elementUI", // split elementUI into a single package
+            priority: 20, // the weight needs to be larger than libs and app or it will be packaged into libs or app
+            test: /[\\/]node_modules[\\/]?element-ui(.*)/ // in order to adapt to cnpm
+          },
+          commons: {
+            name: "chunk-commons",
+            test: resolve("src/components"), // can customize your rules
+            minChunks: 3, //  minimum common number
+            priority: 5,
+            reuseExistingChunk: true
+          }
+        }
+      });
+      config.optimization.runtimeChunk("single");
+    });
   }
 };

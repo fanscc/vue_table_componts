@@ -1,13 +1,22 @@
 {
   "code": 0,
-  "data": {
-    "roles": [
-      "admin"
-    ],
-    "token": "admin",
-    "introduction": "我是超级管理员",
-    "avatar": "https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif",
-    "name": "Super Admin"
-  },
-  "message": "用户登录成功！"
+  "success": true,
+  "model": {
+    "token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTU3NDMxMDE0MSwiaWF0IjoxNTc0MzAyOTQxfQ.IxA_OMy3fIFI5pcnzoEb18mQQHQCFzC8w0vO5O5529fuwTEYREG7rwx5d4UfPuVLong53-8_-evwafzgIrEmNw",
+    "user": {
+      "id": 27,
+      "username": "admin",
+      "avatar": "https://i.loli.net/2019/04/04/5ca5b971e1548.jpeg",
+      "email": "admin@eladmin.com",
+      "phone": "13800000000",
+      "dept": "五华农业生产示范基地",
+      "job": "超级管理员",
+      "enabled": true,
+      "createTime": 1572398898000,
+      "roles": [
+        "TASK_ADD",
+        "TASK_ALL"
+      ]
+    }
+  }
 }

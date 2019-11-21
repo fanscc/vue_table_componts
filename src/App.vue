@@ -5,31 +5,32 @@
 </template>
 
 <style lang="scss">
-html {
+html,
+body {
   height: 100%;
 }
-body {
-  height: calc(100% - 10px);
-}
-body {
-  margin: 0;
-  padding: 0 10px 4px 10px;
+body .el-table th.gutter {
+  display: table-cell !important;
 }
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
   height: 100%;
+  color: #2c3e50;
 }
+
 #nav {
+  padding: 30px;
   a {
     font-weight: bold;
     color: #2c3e50;
-
     &.router-link-exact-active {
       color: #42b983;
     }
   }
+}
+a {
+  text-decoration: none;
 }
 </style>

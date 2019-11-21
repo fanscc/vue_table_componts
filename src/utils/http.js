@@ -1,45 +1,30 @@
 import axios from "axios";
-import { Message, Loading } from "element-ui";
+import { Message, MessageBox, Loading } from "element-ui";
+import router from "@/router/index";
+import { getToken } from "@/utils/auth";
+import store from "@/store";
 
 let loadinginstance = null;
 // 创建axios实例
 
-console.log(window.location.origin);
 const service = axios.create({
+  // baseURL: window.location.origin, // api的base_url
   timeout: 60000 // 请求超时时间
 });
 
 // request拦截器
 service.interceptors.request.use(
   config => {
-    // get请求如果参数为空则清空
-    // 去除多余的空格和空参数
-    if (config.params) {
-      Object.keys(config.params).forEach(item => {
-        if (typeof config.params[item] === "string") {
-          config.params[item] = config.params[item].trim();
-        }
-        if (config.params[item] === "") {
-          delete config.params[item];
-          return;
-        }
-        if (
-          Object.prototype.toString.call(config.params[item]) ===
-            "[object Object]" &&
-          Object.keys(config.params[item]).length === 0
-        ) {
-          delete config.params[item];
-          return;
-        }
-        if (
-          Object.prototype.toString.call(config.params[item]) ===
-            "[object Array]" &&
-          config.params[item].length === 0
-        ) {
-          delete config.params[item];
-        }
-      });
+    if (store.getters.token) {
+      config.headers["X-Token"] = getToken(); // 让每个请求携带自定义token 请根据实际情况自行修改
     }
+    if (
+      process.env.NODE_ENV === "development" &&
+      process.env.Environment !== "mock"
+    ) {
+      config.url = "Api" + config.url;
+    }
+    // 由noloding参数来判断是否需要显示loading
     if (!config.noloding) {
       loadinginstance = null;
       loadinginstance = Loading.service({
@@ -63,22 +48,33 @@ service.interceptors.response.use(
   response => {
     loadinginstance && loadinginstance.close();
     loadinginstance = null;
-    let { msg } = response.data;
-    const { success, state } = response.data;
-    if ((!success && success !== undefined) || state === -1) {
-      if (state === -1) {
-        msg = "用户未登陆";
+    const { msg, success, code } = response.data;
+    if (!success) {
+      // code 401 sesion过期去登录页从新登录
+      if (code === 401) {
+        MessageBox.confirm(msg, "确定登出", {
+          confirmButtonText: "重新登录",
+          cancelButtonText: "取消",
+          type: "warning"
+        }).then(() => {
+          router.push({ path: "/login" });
+        });
+      } else if (code === 403) {
+        // 403 没有权限
+        router.push({ path: "/errorPage/401" });
+      } else {
+        Message({
+          message: msg,
+          type: "error",
+          duration: 5 * 1000
+        });
       }
-      Message({
-        message: msg,
-        type: "error",
-        duration: 5 * 1000
-      });
+      return Promise.reject("error");
+    } else {
+      return response.data;
     }
-    return response.data || response;
   },
   error => {
-    console.log(`err${error}`); // for debug
     loadinginstance && loadinginstance.close();
     loadinginstance = null;
     if (error.toString().indexOf("Error: timeout") !== -1) {
