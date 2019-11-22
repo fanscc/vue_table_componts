@@ -69,7 +69,7 @@ service.interceptors.response.use(
           duration: 5 * 1000
         });
       }
-      return Promise.reject("error");
+      return Promise.reject(msg);
     } else {
       return response.data;
     }
@@ -83,7 +83,7 @@ service.interceptors.response.use(
         type: "error",
         duration: 2500
       });
-      return Promise.reject(error);
+      return Promise.reject("网络请求超时");
     }
     if (error.toString().indexOf("Error: Network Error") !== -1) {
       Message({
@@ -91,14 +91,14 @@ service.interceptors.response.use(
         type: "error",
         duration: 2500
       });
-      return Promise.reject(error);
+      return Promise.reject("网络请求错误");
     }
     Message({
       message: error.message,
       type: "error",
       duration: 5 * 1000
     });
-    return Promise.reject(error);
+    return Promise.reject(error.message);
   }
 );
 

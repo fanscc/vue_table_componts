@@ -1,6 +1,7 @@
 {
   "code": 0,
   "success": true,
+  "msg": "服务异常",
   "model": {
     "token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTU3NDMxMDE0MSwiaWF0IjoxNTc0MzAyOTQxfQ.IxA_OMy3fIFI5pcnzoEb18mQQHQCFzC8w0vO5O5529fuwTEYREG7rwx5d4UfPuVLong53-8_-evwafzgIrEmNw",
     "user": {

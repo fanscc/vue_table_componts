@@ -85,9 +85,7 @@ export const layout = {
     },
     {
       name: "orgName",
-      title: "用户编号",
-      iconName: "el-icon-question",
-      tooltipContent: "你好,这是详细的描述"
+      title: "用户编号"
     },
     {
       name: "provinceName",

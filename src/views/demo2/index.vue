@@ -51,7 +51,7 @@
 import { layout } from "./indexData";
 import searchDom from "@/components/searchDom/searchDom.vue";
 import tableDom from "@/components/tableDom/index.vue";
-
+import { login } from "@/api/login";
 export default {
   components: {
     tableDom,
@@ -63,6 +63,12 @@ export default {
       searchFrom: layout.searchFrom,
       realTableColumns: layout.realTableColumns
     };
+  },
+  async created() {
+    let {
+      model: { token }
+    } = await this.$utils.errorCaptured(login)();
+    console.log(token);
   },
   methods: {
     search() {

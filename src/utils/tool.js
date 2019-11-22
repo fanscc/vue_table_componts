@@ -188,3 +188,19 @@ export function validatenull(val) {
   }
   return false;
 }
+
+/**
+ * 错误捕获的方法,使用方式errorCaptured(UserService.getAllUser)(getAllUser函数需要传递的参数)
+ * @param func
+ */
+export const errorCaptured = func => {
+  return new Proxy(func, {
+    async apply(target, thisBinding, args) {
+      try {
+        return await target.apply(thisBinding, args);
+      } catch (e) {
+        console.error("error", e);
+      }
+    }
+  });
+};

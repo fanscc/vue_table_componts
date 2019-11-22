@@ -13,7 +13,10 @@ export const layout = {
       placeholder: "请选择",
       name: "orderType",
       value: "0",
-      staticArr: [{ label: "退货", value: "0" }, { label: "换货", value: "1" }],
+      staticArr: [
+        { label: "退货", value: "0" },
+        { label: "换货", value: "1" }
+      ],
       defaultArr: true
     },
     {
@@ -82,9 +85,7 @@ export const layout = {
     },
     {
       name: "orgName",
-      title: "用户编号",
-      iconName: "el-icon-question",
-      tooltipContent: "你好,这是详细的描述"
+      title: "用户编号"
     },
     {
       name: "provinceName",

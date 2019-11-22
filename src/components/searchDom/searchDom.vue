@@ -105,7 +105,6 @@ export default {
       }
     },
     getEmuns() {
-      console.log(this.staticParams);
       request({
         method: this.methodRequest,
         url: this.path,
