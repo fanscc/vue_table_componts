@@ -13,10 +13,7 @@ export const layout = {
       placeholder: "请选择",
       name: "orderType",
       value: "0",
-      staticArr: [
-        { label: "退货", value: "0" },
-        { label: "换货", value: "1" }
-      ],
+      staticArr: [{ label: "退货", value: "0" }, { label: "换货", value: "1" }],
       defaultArr: true
     },
     {
@@ -58,6 +55,7 @@ export const layout = {
       inputModel: "fsDoubleTime",
       title: "申请退换时间",
       name: "retrunTimeValue",
+      value: [],
       labelWidth: "120px"
     },
     {

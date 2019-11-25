@@ -54,6 +54,7 @@ export const layout = {
     {
       inputModel: "fsDoubleTime",
       title: "申请退换时间",
+      value: [],
       name: "retrunTimeValue",
       labelWidth: "120px"
     },

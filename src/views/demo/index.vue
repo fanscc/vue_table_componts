@@ -28,6 +28,7 @@
     <tableDom
       ref="tableCommon"
       path="/mock_autoTreasure"
+      :value-clone="valueClone"
       request_method="post"
       :table_control="true"
       :real-table-columns="realTableColumns"
