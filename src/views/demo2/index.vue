@@ -33,6 +33,35 @@
       :real-table-columns="realTableColumns"
       @childmethods_out="childmethods_out"
     >
+      <template slot="expandSlot">
+        <el-table-column type="expand" label="详情" width="1">
+          <template slot-scope="props">
+            <el-form label-position="left" inline class="demo-table-expand">
+              <el-form-item label="商品名称">
+                <span>{{ props.row.orgName }}</span>
+              </el-form-item>
+              <el-form-item label="所属店铺">
+                <span>{{ props.row.shop }}</span>
+              </el-form-item>
+              <el-form-item label="商品 ID">
+                <span>{{ props.row.id }}</span>
+              </el-form-item>
+              <el-form-item label="店铺 ID">
+                <span>{{ props.row.shopId }}</span>
+              </el-form-item>
+              <el-form-item label="商品分类">
+                <span>{{ props.row.category }}</span>
+              </el-form-item>
+              <el-form-item label="店铺地址">
+                <span>{{ props.row.address }}</span>
+              </el-form-item>
+              <el-form-item label="商品描述">
+                <span>{{ props.row.desc }}</span>
+              </el-form-item>
+            </el-form>
+          </template>
+        </el-table-column>
+      </template>
       <template slot="userCode" slot-scope="scopeHeader">
         <el-table-column align="right" :prop="scopeHeader.data.name">
           <template slot="header">
@@ -78,7 +107,18 @@ export default {
     childmethods_out(button, val) {
       if (typeof button === "string" && button === "dialog") {
         this.$message.success(`弹窗参数${JSON.stringify(val)}`);
+      } else if (button.event.type === "expand") {
+        this.toogleExpand(val);
       }
+    },
+    toogleExpand(row) {
+      let $table = this.$refs.tableCommon.$refs.tableDom;
+      this.$refs.tableCommon.realTableData.map(item => {
+        if (row.id !== item.id) {
+          $table.toggleRowExpansion(item, false);
+        }
+      });
+      $table.toggleRowExpansion(row);
     }
   }
 };
@@ -88,5 +128,20 @@ export default {
   height: 100%;
   display: flex;
   flex-direction: column;
+  & ::v-deep .el-table__expand-icon > .el-icon {
+    font-size: 0 !important;
+  }
+}
+.demo-table-expand {
+  font-size: 0;
+}
+.demo-table-expand label {
+  width: 90px;
+  color: #99a9bf;
+}
+.demo-table-expand .el-form-item {
+  margin-right: 0;
+  margin-bottom: 0;
+  width: 50%;
 }
 </style>

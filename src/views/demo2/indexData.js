@@ -13,10 +13,7 @@ export const layout = {
       placeholder: "请选择",
       name: "orderType",
       value: "0",
-      staticArr: [
-        { label: "退货", value: "0" },
-        { label: "换货", value: "1" }
-      ],
+      staticArr: [{ label: "退货", value: "0" }, { label: "换货", value: "1" }],
       defaultArr: true
     },
     {
@@ -72,6 +69,13 @@ export const layout = {
   realTableColumns: [
     // 配置表格
     {
+      title: "展开列",
+      name: "expend",
+      width: "55",
+      type: "slot",
+      slotName: "expandSlot"
+    },
+    {
       title: "#",
       width: "55",
       ishidden: true,
@@ -87,9 +91,7 @@ export const layout = {
       name: "orgName",
       title: "用户编号",
       type: "slot",
-      slotName: "userCode",
-      iconName: "el-icon-question",
-      tooltipContent: "你好,这是详细的描述"
+      slotName: "userCode"
     },
     {
       name: "provinceName",
@@ -139,6 +141,13 @@ export const layout = {
       type: "button",
       buttons: [
         // 配置操作栏
+        {
+          name: "展开详情",
+          icon: null,
+          event: {
+            type: "expand"
+          }
+        },
         {
           name: "编辑",
           icon: null,

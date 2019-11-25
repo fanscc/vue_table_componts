@@ -35,6 +35,10 @@ npm run lint
 
 后台管理系统里面table表格跟查询条件的公共组件
 
+项目模板
+全局安装：npm install fanscky-template-cli -g
+创建项目：fanscky-cli init xx(项目名字)
+
 ## 组件使用
 
 npm install vue-fanscc-table -S-d

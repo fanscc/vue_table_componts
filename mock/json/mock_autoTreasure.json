@@ -9,6 +9,7 @@
         "total": 5,
         "list": [
             {
+                "id": 1,
                 "orgName": "珠海远大汽车维修服务有限公司",
                 "provinceName": "广东  珠海市  香洲区",
                 "status": 1,
@@ -20,6 +21,7 @@
                 "created": "fanscky"
             },
             {
+                "id": 2,
                 "orgName": "珠海远大汽车维修服务有限公司",
                 "provinceName": "广东  珠海市  香洲区",
                 "status": 0,
