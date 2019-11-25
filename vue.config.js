@@ -42,7 +42,7 @@ if (Environment !== "mock") {
     "/auth/info": proxyFun(true, url, "/getInfo"),
     "/api/menus/build": proxyFun(true, url, "/menus"),
     "/mock_autoTreasure": proxyFun(true, url, "/mock_autoTreasure"),
-    "/select": proxyFun(true, url, "/menus")
+    "/select": proxyFun(true, url, "/select")
   };
 }
 
@@ -72,7 +72,7 @@ module.exports = {
     },
     disableHostCheck: true,
     proxy: proxyObj,
-    after: Environment === "mock" ? require("./mock/index.js") : () => {}
+    after: Environment === "mock" ? require("./mock/index.js") : () => { }
   },
   configureWebpack: {
     // provide the app's title in webpack's name field, so that

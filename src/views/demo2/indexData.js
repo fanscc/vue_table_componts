@@ -72,6 +72,7 @@ export const layout = {
     {
       title: "展开列",
       name: "expend",
+      isVisibility: true,
       width: "55",
       type: "slot",
       slotName: "expandSlot"
@@ -79,13 +80,13 @@ export const layout = {
     {
       title: "#",
       width: "55",
-      ishidden: true,
+      isVisibility: true,
       type: "selection"
     },
     {
       title: "序号",
       width: "55",
-      ishidden: true,
+      isVisibility: true,
       type: "index"
     },
     {

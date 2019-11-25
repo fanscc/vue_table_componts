@@ -16,7 +16,7 @@
           <span>
             <el-checkbox-group v-model="checkedTbale">
               <template v-for="(item, index) in realTableColumns">
-                <span :key="index" class="mg_20r" v-if="!item.ishidden">
+                <span :key="index" class="mg_20r" v-if="!item.isVisibility">
                   <el-checkbox :label="item.name">{{ item.title }}</el-checkbox>
                 </span>
               </template>
@@ -117,9 +117,6 @@ export default {
     realTableData_parent: {
       type: Array
     },
-    fliterData: {
-      type: Function
-    },
     totalRowMap: {
       type: Object
     },
@@ -207,7 +204,7 @@ export default {
     } else {
        // 默认列全部显示
       this.realTableColumns.map(item => {
-        if (item.ishidden) return
+        if (item.isVisibility) return
         this.checkedTbale.push(item.name)
       })
     }
@@ -247,7 +244,7 @@ export default {
         /**启到回显作用 */
         this.checkedTbale = []
         this.realTableColumns.map(item => {
-          if (item.ishidden) return
+          if (item.isVisibility) return
           if (item.showLine) {
             this.checkedTbale.push(item.name)
           }
@@ -319,11 +316,7 @@ export default {
       })
         .then(res => {
           if (res.success) {
-            if (this.fliterData && typeof this.fliterData === "function") {
-              this.realTableData = this.fliterData(res.model.list);
-            } else {
-              this.realTableData = res.model.list || res.model.model || [];
-            }
+            this.realTableData = res.model.list || res.model.model || [];
             this.total = res.model.total;
             this.$nextTick(() => {
               this.$refs.tableDom.doLayout();
@@ -429,7 +422,7 @@ export default {
      */
     showControl() {
       this.realTableColumns.map(item => {
-        if (item.ishidden) {
+        if (item.isVisibility) {
           this.$set(item, 'showLine', true)
         } else {
           if (this.checkedTbale.includes(item.name)) {
