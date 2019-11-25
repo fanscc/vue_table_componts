@@ -187,7 +187,7 @@ export default {
       justify-content: space-between;
       align-items: center;
       padding-right: 20px;
-      margin: 0;
+      margin: 0px;
     }
     p:nth-of-type(1) {
       margin-bottom: 10px;
