@@ -75,17 +75,38 @@
         </el-table-column>
       </template>
     </tableDom>
+
+    <popUp ref="popUpDom">
+      <div slot="content" class="conten-slot">
+        订单详情
+      </div>
+      <div slot="rightContent" class="conten-right-slot">
+        <div class="block">
+          <p class="nav_conten_right">订单详情</p>
+          <el-timeline>
+            <el-timeline-item color="#0bbd87" v-for="ite in 26" :key="ite">
+              <div class="conten-right-item">
+                <p><span>订单新建</span><span>2018/4/12 20:46</span></p>
+                <p><span>未审核</span><span>张三</span></p>
+              </div>
+            </el-timeline-item>
+          </el-timeline>
+        </div>
+      </div>
+    </popUp>
   </div>
 </template>
 <script>
 import { layout } from "./indexData";
 import searchDom from "@/components/searchDom/searchDom.vue";
 import tableDom from "@/components/tableDom/index.vue";
+import popUp from "@/components/popUp";
 import { login } from "@/api/login";
 export default {
   components: {
     tableDom,
-    searchDom
+    searchDom,
+    popUp
   },
   data() {
     return {
@@ -107,7 +128,8 @@ export default {
     },
     childmethods_out(button, val) {
       if (typeof button === "string" && button === "dialog") {
-        this.$message.success(`弹窗参数${JSON.stringify(val)}`);
+        // this.$message.success(`弹窗参数${JSON.stringify(val)}`);
+        this.$refs.popUpDom.open();
       } else if (button.event.type === "expand") {
         this.toogleExpand(val);
       }
@@ -144,5 +166,32 @@ export default {
   margin-right: 0;
   margin-bottom: 0;
   width: 50%;
+}
+.conten-slot {
+  width: 500px;
+  background: #fff;
+}
+.conten-right-slot {
+  width: 300px;
+  padding-top: 10px;
+  .nav_conten_right {
+    padding-left: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  .conten-right-item {
+    p {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-right: 20px;
+      margin: 0;
+    }
+    p:nth-of-type(1) {
+      margin-bottom: 10px;
+    }
+  }
 }
 </style>
