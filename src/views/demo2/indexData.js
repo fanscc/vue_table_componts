@@ -2,6 +2,17 @@ export const layout = {
   // 搜索的样式
   searchFrom: [
     {
+      inputModel: "fsCheckbox",
+      title: "状态",
+      name: "status",
+      mapName: "退货",
+      mode: "radio",
+      paramsMaping: {
+        label: "desc",
+        value: "type"
+      }
+    },
+    {
       inputModel: "fsInput",
       title: "用户名2",
       name: "username",

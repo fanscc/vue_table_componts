@@ -1,7 +1,14 @@
 <template>
-  <div class="popUpDome" v-show="dialogVisible">
+  <div
+    class="popUpDome"
+    v-show="dialogVisible"
+    @click.self="dialogVisible = false"
+  >
     <div class="popUpDome_conten">
-      <div style="height: 100%;overflow: auto;">
+      <div
+        style="height: 100%;overflow: auto;"
+        @click.self="dialogVisible = false"
+      >
         <slot name="content"></slot>
       </div>
       <span class="close_btn" @click="closed"
@@ -35,13 +42,16 @@ export default {
   methods: {
     open() {
       this.dialogVisible = true;
+      this.$nextTick(() => {
+        this.status = true;
+      });
+      console.log(1);
     },
     expandOrClose() {
       this.status = !this.status;
     },
     closed() {
       this.dialogVisible = false;
-      this.status = false;
     }
   }
 };
@@ -79,7 +89,7 @@ export default {
     display: inline-block;
     background: #fff;
     position: absolute;
-    transition: all 0.5s;
+    transition: transform 0.5s;
     right: 0;
   }
   .icon_btn {

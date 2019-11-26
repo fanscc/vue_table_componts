@@ -10,7 +10,13 @@
         v-for="(item, $index) in searchFrom"
         :key="$index"
         class="display_inline"
-        :style="{ display: noshow ? 'none' : 'inline-block' }"
+        :style="{
+          display: noshow
+            ? 'none'
+            : item.inputModel === 'fsCheckbox'
+            ? 'block'
+            : 'inline-block'
+        }"
       >
         <component
           :is="getComponentName(item)"
@@ -33,6 +39,7 @@
 
 <script>
 import fsInput from "./common/fsinput.vue";
+import fsCheckbox from "./common/fscheckbox.vue";
 import fsSelect from "./common/fsselect.vue";
 import fsTime from "./common/fstime.vue";
 import fsDoubleTime from "./common/fsdoubletime.vue";
@@ -43,6 +50,7 @@ import request from "@/utils/http";
 export default {
   components: {
     fsInput,
+    fsCheckbox,
     fsSelect,
     fsTime,
     fsDoubleTime,
@@ -115,8 +123,10 @@ export default {
         .then(res => {
           if (res.success || res.success === undefined) {
             const enumData = res.model || res;
+            let needArr = ["fsSelect", "fsCheckbox"];
             this.searchFrom.map(item => {
-              if (item.inputModel === "fsSelect" && !item.defaultArr) {
+              if (needArr.includes(item.inputModel)) {
+                if (item.defaultArr) return; // 代表前端写死
                 this.$set(
                   item,
                   "staticArr",
