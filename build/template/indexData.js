@@ -72,13 +72,13 @@ export const layout = {
     {
       title: "#",
       width: "55",
-      ishidden: true,
+      isVisibility: true,
       type: "selection"
     },
     {
       title: "序号",
       width: "55",
-      ishidden: true,
+      isVisibility: true,
       type: "index"
     },
     {

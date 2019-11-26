@@ -185,7 +185,7 @@ export default {
       totalRow: {}, // 合计行的合计数据
       resolve_self: null,
       headerControl: false, // 显示控制动态表格的面板
-      routerName: this.$route.name,
+      routerPath: this.$route.path,
       checkedTbale: []
     };
   },
@@ -196,7 +196,7 @@ export default {
     /**
      * 从缓存中获取之前存的动态显示的列如果没有测默认全部显示
      */
-    let headerControlArr = JSON.parse(localStorage.getItem(this.routerName))
+    let headerControlArr = JSON.parse(localStorage.getItem(this.routerPath))
     if (headerControlArr && headerControlArr.length>0) {
        headerControlArr.map(item => {
         this.checkedTbale.push(item)
@@ -316,7 +316,7 @@ export default {
       })
         .then(res => {
           if (res.success) {
-            this.realTableData = res.model.list || res.model.model || [];
+            this.realTableData = res.model.list || res.model.model || res.model.records || [];
             this.total = res.model.total;
             this.$nextTick(() => {
               this.$refs.tableDom.doLayout();
@@ -363,7 +363,7 @@ export default {
         }).catch(() => {});
       } else {
         // 主要用来写一些弹窗这类的
-        this.$emit('childmethods_out', button, val) 
+        this.$emit('childmethods_out', button, val)
       }
     },
     deleted(button, val) {
