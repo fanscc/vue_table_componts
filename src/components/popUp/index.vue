@@ -45,7 +45,6 @@ export default {
       this.$nextTick(() => {
         this.status = true;
       });
-      console.log(1);
     },
     expandOrClose() {
       this.status = !this.status;
