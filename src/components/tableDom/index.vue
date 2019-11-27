@@ -9,9 +9,6 @@
         width="400"
         trigger="manual"
       >
-        <div class="commpone_nav">
-          自定义列表项
-        </div>
         <div>
           <span>
             <el-checkbox-group v-model="checkedTbale">
@@ -23,18 +20,15 @@
             </el-checkbox-group>
           </span>
           <span class="dialog-footer">
-            <el-button @click="headerControl = false">取 消</el-button>
-            <el-button type="primary" @click="saveCheckedTbale"
+            <el-button @click="headerControl = false">关闭</el-button>
+            <!-- <el-button type="primary" @click="saveCheckedTbale"
               >确 定</el-button
-            >
+            > -->
           </span>
         </div>
         <el-button slot="reference" class="float_r">
           <i
-            class="icon_table"
-            :class="[
-              headerControl ? 'el-icon-caret-top' : 'el-icon-caret-bottom'
-            ]"
+            class="icon_table el-icon-setting"
             @click="headerControl = !headerControl"
           />
         </el-button>
@@ -239,17 +233,21 @@ export default {
       deep: true,
       immediate: true
     },
-     headerControl(val) {
-      if (val) {
-        /**启到回显作用 */
-        this.checkedTbale = []
-        this.realTableColumns.map(item => {
-          if (item.isVisibility) return
-          if (item.showLine) {
-            this.checkedTbale.push(item.name)
-          }
-        })
-      }
+    //  headerControl(val) {
+    //   if (val) {
+    //     /**启到回显作用 */
+    //     this.checkedTbale = []
+    //     this.realTableColumns.map(item => {
+    //       if (item.isVisibility) return
+    //       if (item.showLine) {
+    //         this.checkedTbale.push(item.name)
+    //       }
+    //     })
+    //   }
+    // }
+    checkedTbale(val) {
+      localStorage.setItem(this.routerPath, JSON.stringify(val))
+      this.showControl();
     }
   },
   methods: {
@@ -441,7 +439,7 @@ export default {
      */
     saveCheckedTbale() {
       this.headerControl = false;
-      localStorage.setItem(this.routerName, JSON.stringify(this.checkedTbale))
+      localStorage.setItem(this.routerPath, JSON.stringify(this.checkedTbale))
       this.showControl();
     },
     clearSelection() {
