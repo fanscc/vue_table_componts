@@ -1,0 +1,37 @@
+{
+    "code": 0,
+    "success": true,
+    "model": {
+        "menus": [
+            {
+                "name": "系统管理",
+                "path": "/system",
+                "redirect": "/system/demo",
+                "component": "Layout",
+                "alwaysShow": true,
+                "meta": {
+                    "title": "系统管理",
+                    "icon": "iconkaipiao"
+                },
+                "children": [
+                    {
+                        "name": "demo",
+                        "path": "demo",
+                        "component": "demo/index",
+                        "meta": {
+                            "title": "demo页面"
+                        }
+                    },
+                    {
+                        "name": "demo2",
+                        "path": "demo2",
+                        "component": "demo2/index",
+                        "meta": {
+                            "title": "demo2页面"
+                        }
+                    }
+                ]
+            }
+        ]
+    }
+}

@@ -1,0 +1,22 @@
+{
+    "code": 0,
+    "success": true,
+    "msg": "服务异常",
+    "model": {
+        "user": {
+            "id": 27,
+            "username": "admin",
+            "avatar": "https://i.loli.net/2019/04/04/5ca5b971e1548.jpeg",
+            "email": "admin@eladmin.com",
+            "phone": "13800000000",
+            "dept": "五华农业生产示范基地",
+            "job": "超级管理员",
+            "enabled": true,
+            "createTime": 1572398898000,
+            "roles": [
+                "TASK_ADD",
+                "TASK_ALL"
+            ]
+        }
+    }
+}
