@@ -114,7 +114,7 @@
   </el-table-column>
   <el-table-column
     v-else
-    :label="title"
+    :label="$t(title)"
     :prop="name"
     :fixed="fixed"
     :align="align"

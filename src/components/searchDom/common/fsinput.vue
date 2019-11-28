@@ -1,6 +1,6 @@
 <template>
   <div class="fe-input">
-    <el-form-item :label="title + ':'" :label-width="labelWidth">
+    <el-form-item :label="$t(title) + ':'" :label-width="labelWidth">
       <el-input
         ref="input"
         v-model="defaultValue"

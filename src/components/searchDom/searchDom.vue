@@ -94,7 +94,6 @@ export default {
       noshow: false // 控制搜索条件是否显示
     };
   },
-
   created() {
     this.dealQueryData(this.searchFrom);
     if (this.path) {

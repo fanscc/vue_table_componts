@@ -29,6 +29,14 @@
                         "meta": {
                             "title": "demo2页面"
                         }
+                    },
+                    {
+                        "name": "demo3",
+                        "path": "demo3",
+                        "component": "demo3/index",
+                        "meta": {
+                            "title": "demo3页面"
+                        }
                     }
                 ]
             }

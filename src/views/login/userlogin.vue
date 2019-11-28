@@ -37,18 +37,25 @@
     </el-form-item>
     <!-- <el-checkbox v-model="checked">记住账号</el-checkbox> -->
     <el-form-item>
+      <el-radio-group v-model="language" @change="changeLanguage">
+        <el-radio label="zh">中文</el-radio>
+        <el-radio label="en">英文</el-radio>
+      </el-radio-group>
+    </el-form-item>
+    <el-form-item>
       <el-button
         type="primary"
         size="small"
         @click.native.prevent="handleLogin"
         class="login-submit"
-        >登录</el-button
+        >{{ $t("login.logIn") }}</el-button
       >
     </el-form-item>
   </el-form>
 </template>
 
 <script>
+import Cookies from "js-cookie";
 export default {
   name: "userlogin",
   data() {
@@ -66,6 +73,7 @@ export default {
         password: "caokangying"
       },
       checked: false,
+      language: Cookies.get("language") || "zh",
       loginRules: {
         username: [
           { required: true, trigger: "blur", validator: validateUsername }
@@ -96,6 +104,11 @@ export default {
           });
         }
       });
+    },
+    changeLanguage(val) {
+      this.$i18n.locale = val;
+      Cookies.set("language", val);
+      this.$message.success("语言切换成功");
     }
   }
 };
